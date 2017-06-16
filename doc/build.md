@@ -91,6 +91,24 @@ If you use OSX El Capitan, brew installs gcc the latest version gcc-6. So you ma
 cd xgboost; cp make/config.mk ./config.mk; make -j4
 ```
 
+
+NOTE: If you use macOS Sierra and want to use xgboost with openmp support, llvm is better choice than gcc-6(gcc-X).
+
+Install llvm first,
+```bash
+brew install llvm
+cd /usr/local/lib
+ln -s /usr/local/Cellar/llvm/LLVM_VERSION/lib/libomp.dylib libomp.dylib
+export CC=/usr/local/Cellar/llvm/LLVM_VERSION/bin/clang
+export CXX=/usr/local/Cellar/llvm/LLVM_VERSION/bin/clang++
+```
+
+and build using the following commands
+```
+cd xgboost; cp make/config.mk ./config.mk; make -j4
+```
+
+
 ### Building on Windows
 You need to first clone the xgboost repo with recursive option clone the submodules.
 If you are using github tools, you can open the git-shell, and type the following command.
